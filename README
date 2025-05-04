@@ -1,0 +1,19 @@
+# WHAT
+super simple Docker container to host node.js script and allow CORS requests. Run on VPN for security
+
+# STEPS
+1. makeEncryptedString.sh   set decrypted password for vault and run
+2. save encrypted key: pass this into the docker environment variable
+3. save encrypted pass: store in config.json for decryption
+4. Docker instance: add ENV with SECRETS_ACCESS_TOKEN  with the key
+5. Mount /config.json with format
+    {
+        "userRequestKeyABC": "vault-secret-key",   // fetch request passes userRequestKey
+        "userRequestKey123": "vault-secret-key2", // script translated to this key and fetches
+        "rotations": [encryptedPass]
+    }
+6. url request: `await (await fetch('https://nodewebsocket.example.com/vaultSecret?key=userRequestKeyABC')).text()`
+
+# Troubleshoot
+- CORS issue? fixup nginx
+  custom locations: /vaultSecret
