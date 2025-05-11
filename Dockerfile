@@ -10,6 +10,8 @@ EXPOSE 8000
 COPY secrets.sh /bin/secrets.sh
 COPY bws /bin/bws
 COPY main.js /main/main.js
+COPY common.js /main/common.js
+COPY wikialbums.js /main/wikialbums.js
 COPY startup.sh /main/startup.sh
 COPY rotatestring.sh /main/rotatestring.sh
 CMD ["/main/startup.sh"]
